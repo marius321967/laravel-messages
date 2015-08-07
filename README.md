@@ -1,10 +1,10 @@
 ### Laravel Messages
 
-Add and handle user messages of custom types in Laravel.
+Add and handle user messages of custom types in Laravel 5.
 
 #### Installation
 
-Once installed, use add a Service Provider and a Facade in your `config/app.php` file:
+Once installed, add a Service Provider and a Facade in your `config/app.php` file:
 
 `providers`:
 `'marius321967\Messages\InfoMessageServiceProvider',`
