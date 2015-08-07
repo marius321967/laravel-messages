@@ -1,0 +1,13 @@
+{
+    "name": "marius321967/laravel-messages",
+    "license": "Unlicense",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+			"marius321967\\Messages\\": "src/"
+		}
+    }
+}
