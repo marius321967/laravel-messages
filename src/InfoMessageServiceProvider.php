@@ -23,6 +23,6 @@ class InfoMessageServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('info_messages', 'App\Libraries\Messages\MessageHandler');
+        $this->app->bind('info_messages', 'marius321967\Messages\MessageHandler');
     }
 }
