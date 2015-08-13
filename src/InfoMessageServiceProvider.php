@@ -12,9 +12,7 @@ class InfoMessageServiceProvider extends \Illuminate\Support\ServiceProvider
      *
      * @return void
      */
-    public function boot() {
-        // view()->share('messagess', 'test');
-    }
+    public function boot() {}
 
     /**
      * Register any application services.
