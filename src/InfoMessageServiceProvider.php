@@ -12,7 +12,11 @@ class InfoMessageServiceProvider extends \Illuminate\Support\ServiceProvider
      *
      * @return void
      */
-    public function boot() {}
+    public function boot() {
+        \Route::filter('messages_store_flash', function() {
+            \Session::flash('flash_messages', \Message::getFlash());
+        });
+	}
 
     /**
      * Register any application services.
