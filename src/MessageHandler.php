@@ -34,11 +34,6 @@ class MessageHandler {
             'message' => $message,
             'type' => $type,
         ];
-        /*
-        // Return key of new message?
-        end($this->messages);
-        return key($this->messages);
-        */
     }
 
     public function flash($message, $type = 'info') {
@@ -48,12 +43,4 @@ class MessageHandler {
         ];
     }
 
-    // Not using currently.
-    public function dumpBootstrapFormatted() {
-        $html = '';
-        foreach ($this->messages as $message) {
-            $html .= '<div class="alert alert-'.$message['type'].'" role="alert">'.$message['message'].'</div>'.PHP_EOL;
-        }
-        return $html;
-    }
 }
