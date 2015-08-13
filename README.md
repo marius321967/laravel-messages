@@ -12,6 +12,11 @@ Once installed, add a Service Provider and a Facade in your `config/app.php` fil
 `facades`:
 `'Message'   => 'marius321967\Messages\MessageFacade'`
 
+In `Kernel` class (`app/Http/Kernel.php`), add the following element to the `middleware` array:
+```php
+\App\Libraries\Messages\StoreFlashMessages::class
+```
+This will create a global filter that flashes the needed messages.
 
 #### Usage
 
