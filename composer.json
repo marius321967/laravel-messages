@@ -3,7 +3,7 @@
     "license": "Unlicense",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*"
+        "laravel/framework": "4.2.*"
     },
     "autoload": {
         "psr-4": {
