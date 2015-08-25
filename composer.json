@@ -2,7 +2,7 @@
     "name": "marius321967/laravel-messages",
     "license": "Unlicense",
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.4",
         "laravel/framework": "4.2.*"
     },
     "autoload": {
