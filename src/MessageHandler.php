@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Marius
- * Date: 7/5/15
- * Time: 2:11 PM
- */
 
 namespace marius321967\Messages;
 
+use Session;
 
 class MessageHandler {
 
@@ -16,8 +11,8 @@ class MessageHandler {
     protected $flash_messages = [];
 
     public function __construct() {
-        if (\Session::has('flash_messages')) {
-            $this->messages = \Session::get('flash_messages');
+        if (Session::has('flash_messages')) {
+            $this->messages = Session::get('flash_messages');
         }
     }
 
