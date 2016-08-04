@@ -2,7 +2,7 @@
 
 namespace marius321967\Messages;
 
-use Session;
+use Illuminate\Session\SessionManager;
 
 class MessageHandler {
 
@@ -10,9 +10,17 @@ class MessageHandler {
 
     protected $flash_messages = [];
 
+    /**
+     * @var SessionManager
+     */
+    protected $sessionManager;
+
+
     public function __construct() {
-        if (Session::has('flash_messages')) {
-            $this->messages = Session::get('flash_messages');
+        $this->sessionManager = app(SessionManager::class);
+
+        if ($this->sessionManager->has('flash_messages')) {
+            $this->messages = $this->sessionManager->get('flash_messages');
         }
     }
 

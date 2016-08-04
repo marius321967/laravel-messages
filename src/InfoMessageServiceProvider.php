@@ -2,9 +2,9 @@
 
 namespace marius321967\Messages;
 
+use Illuminate\Support\ServiceProvider;
 
-class InfoMessageServiceProvider extends \Illuminate\Support\ServiceProvider
-{
+class InfoMessageServiceProvider extends ServiceProvider {
 
 
     /**
@@ -21,6 +21,10 @@ class InfoMessageServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('info_messages', 'marius321967\Messages\MessageHandler');
+        $this->app->singleton(MessageHandler::class, function() {
+            return new MessageHandler();
+        });
+
+        $this->app->bind('info_messages', MessageHandler::class);
     }
 }
