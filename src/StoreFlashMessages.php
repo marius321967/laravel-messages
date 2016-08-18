@@ -30,8 +30,8 @@ class StoreFlashMessages {
     public function handle($request, \Closure $next) {
         $response = $next($request);
 
-        $this->sessionManager->flash('flash_messages',
-            $this->messageManager->getFlash());
+        if (!empty($flashMessages = $this->messageManager->getFlash()))
+            $this->sessionManager->flash('flash_messages', $flashMessages);
 
         return $response;
     }
