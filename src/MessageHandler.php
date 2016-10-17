@@ -19,9 +19,8 @@ class MessageHandler {
     public function __construct() {
         $this->sessionManager = app(SessionManager::class);
 
-        if ($this->sessionManager->has('flash_messages')) {
+        if ($this->sessionManager->has('flash_messages'))
             $this->messages = $this->sessionManager->get('flash_messages');
-        }
     }
 
     public function getAll() {

@@ -20,12 +20,6 @@ class StoreFlashMessages {
     public function __construct() {
         $this->sessionManager = app(SessionManager::class);
         $this->messageManager = app(MessageHandler::class);
-
-        if ($this->sessionManager->has('flash_messages')) {
-            $messages = $this->sessionManager->get('flash_messages');
-            foreach ($messages as $message)
-                $this->messageManager->add($message['message'], $message['type']);
-        }
     }
 
     public function handle($request, \Closure $next) {
