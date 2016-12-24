@@ -6,7 +6,7 @@ use Illuminate\Session\SessionManager;
 
 class MessageHandler {
 
-    protected $messages = [];
+    protected $messages;
 
     protected $flash_messages = [];
 
@@ -24,6 +24,9 @@ class MessageHandler {
     }
 
     public function getAll() {
+        if (is_null($this->messages))
+            $this->loadFlashedMessages();
+
         return $this->messages;
     }
 
@@ -32,6 +35,9 @@ class MessageHandler {
     }
 
     public function add($message, $type = 'info') {
+        if (is_null($this->messages))
+            $this->loadFlashedMessages();
+
         $this->messages[] = [
             'message' => $message,
             'type' => $type,
@@ -43,6 +49,12 @@ class MessageHandler {
             'message' => $message,
             'type' => $type,
         ];
+    }
+
+    private function loadFlashedMessages() {
+        $flashed = $this->sessionManager->get('flash_messages');
+        $flashed = ($flashed) ?: []; // Or empty array.
+        $this->messages = $flashed;
     }
 
 }
