@@ -25,8 +25,15 @@ class StoreFlashMessages {
     public function handle($request, \Closure $next) {
         $response = $next($request);
 
-        if (!empty($flashMessages = $this->messageManager->getFlash()))
-            $this->sessionManager->flash('flash_messages', $flashMessages);
+        if (!empty($flashMessages = $this->messageManager->getFlash())) {
+            // Array of data arrays, each representing a message.
+            $arrays = [];
+            foreach ($flashMessages as $flashMessage) {
+                $arrays[] = $flashMessage->toArray();
+            }
+
+            $this->sessionManager->flash('flash_messages', $arrays);
+        }
 
         return $response;
     }
