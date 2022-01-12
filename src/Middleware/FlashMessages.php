@@ -22,7 +22,9 @@ class FlashMessages {
     }
 
     /**
-     * Flashes Message[] at index 'flash_messages'
+     * Flashes Message[] at index 'flash_messages'.
+     * 
+     * Fails silently if no session.
      * @param Request $request
      * @param Closure $next
      * @return Response
@@ -30,11 +32,13 @@ class FlashMessages {
     public function handle(Request $request, Closure $next) {
         $response = $next($request);
 
-        $session = $request->session();
-        $flashMessages = $this->messageStore->getFlashedMessages();
-
-        if (!empty($flashMessages)) {
-            $session->flash('flash_messages', $flashMessages);
+        if ($request->hasSession()) {
+            $session = $request->session();
+            $flashMessages = $this->messageStore->getFlashedMessages();
+    
+            if (!empty($flashMessages)) {
+                $session->flash('flash_messages', $flashMessages);
+            }
         }
 
         return $response;

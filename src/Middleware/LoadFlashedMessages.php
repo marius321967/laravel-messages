@@ -22,18 +22,22 @@ class LoadFlashedMessages {
     }
 
     /**
-     * Retrieves Message[] from index 'flash_messages' and stores into MessageStore
+     * Retrieves Message[] from index 'flash_messages' and stores into MessageStore.
+     * 
+     * Fails silently if no session.
      * @param Request $request
      * @param Closure $next
      * @return Response
      */
     public function handle(Request $request, Closure $next) {
-        $session = $request->session();
-        $previousMessages = $session->pull('flash_messages');
-
-        if (is_array($previousMessages)) {
-            foreach ($previousMessages as $message) {
-                $this->store->addContainer($message);
+        if ($request->hasSession()) {
+            $session = $request->session();
+            $previousMessages = $session->pull('flash_messages');
+    
+            if (is_array($previousMessages)) {
+                foreach ($previousMessages as $message) {
+                    $this->store->addContainer($message);
+                }
             }
         }
 

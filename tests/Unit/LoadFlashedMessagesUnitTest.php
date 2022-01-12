@@ -84,9 +84,26 @@ class LoadFlashedMessagesUnitTest extends TestCase
      * @test
      */
     public function testReturnsResponse() {
+        // When
         $response = $this->middleware->handle($this->request, $this->genericNext);
 
+        // Then
         $this->assertInstanceOf(Response::class, $response);
     }
+
+    /**
+     * @test
+     */
+    public function testNoSession(): void {
+        // Given
+        $request = new Request();
+        $request->setLaravelSession(null);
+
+        $this->expectNotToPerformAssertions();
+        
+        // Execute
+        $this->middleware->handle($request, function() {});
+    }
+
 
 }

@@ -11,7 +11,9 @@ use Orchestra\Testbench\TestCase;
 class FlashMessagesUnitTest extends TestCase
 {
 
+    /** @var MessageStore */
     private $messageStore;
+    /** @var FlashMessages */
     private $middleware;
     
     protected function setUp(): void {
@@ -64,6 +66,35 @@ class FlashMessagesUnitTest extends TestCase
 
         // Execute
         $this->middleware->handle($request, function() use ($response) { return $response; });
+    }
+
+    /**
+     * @test
+     */
+    public function testReturnsResponse() {
+        // Given 
+        $request = new Request();
+        $request->setLaravelSession(null);
+
+        // When
+        $response = $this->middleware->handle($request, function() { return new Response(); });
+
+        // Then
+        $this->assertInstanceOf(Response::class, $response);
+    }
+
+    /**
+     * @test
+     */
+    public function testNoSession(): void {
+        // Given
+        $request = new Request();
+        $request->setLaravelSession(null);
+
+        $this->expectNotToPerformAssertions();
+        
+        // Execute
+        $this->middleware->handle($request, function() {});
     }
 
 }
