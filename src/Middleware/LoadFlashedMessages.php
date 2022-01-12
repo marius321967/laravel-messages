@@ -31,8 +31,10 @@ class LoadFlashedMessages {
         $session = $request->session();
         $previousMessages = $session->pull('flash_messages');
 
-        foreach ($previousMessages as $message) {
-            $this->store->addContainer($message);
+        if (is_array($previousMessages)) {
+            foreach ($previousMessages as $message) {
+                $this->store->addContainer($message);
+            }
         }
 
         return $next($request);
